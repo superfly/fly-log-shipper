@@ -1,0 +1,6 @@
+[sinks.honeycomb]
+  # General
+  type = "honeycomb"
+  inputs = ["log_json"] 
+  api_key = "${HONEYCOMB_API_KEY}"
+  dataset = "${HONEYCOMB_DATASET}" 

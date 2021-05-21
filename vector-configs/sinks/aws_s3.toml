@@ -1,0 +1,10 @@
+[sinks.aws_s3]
+  # General
+  type = "aws_s3" 
+  inputs = ["log_json"]
+  bucket = "${AWS_BUCKET}" 
+  compression = "gzip" 
+  region = "${AWS_REGION}"
+  encoding.codec = "ndjson"
+  key_prefix = "{{fly.app.name}}/%F/" # optional, default
+  healthcheck.enabled = true # optional, default

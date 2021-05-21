@@ -1,0 +1,30 @@
+data_dir = "/var/lib/vector/"
+
+[api]
+  enabled = true
+
+[sources.fly_log_metrics]
+  type = "internal_metrics"
+
+[sources.fly_socket]
+  type = "socket"
+  mode = "unix" 
+  path = "/var/run/vector.sock"
+
+[transforms.log_json]
+  type = "remap"
+  inputs = ["fly_socket"]
+  source = '''
+  . = parse_json!(.message)
+  '''
+
+[sinks.fly_log_metrics_prometheus]
+  type = "prometheus_exporter" # required
+  inputs = ["fly_log_metrics"] # required
+  address = "0.0.0.0:9598" # required
+  default_namespace = "fly-logs" # optional, no default
+
+[sinks.blackhole]
+  type = "blackhole"
+  inputs = ["log_json"]
+  

@@ -1,0 +1,10 @@
+[sinks.humio]
+  # General
+  type = "humio_logs"
+  inputs = ["log_json"]
+  compression = "gzip"
+  host_key = "fly.app.instance"
+  token = "${HUMIO_TOKEN}"
+
+  # Encoding
+  encoding.codec = "json"

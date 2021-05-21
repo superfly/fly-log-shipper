@@ -1,0 +1,5 @@
+[sinks.sematext]
+  type = "sematext_logs"
+  inputs = ["log_json"]
+  region = "${SEMATEXT_REGION}"
+  token = "${SEMATEXT_TOKEN}"
