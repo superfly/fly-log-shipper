@@ -73,7 +73,7 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 # NATS
 The log stream is provided through the [NATS protocol](https://docs.nats.io/nats-protocol/nats-protocol) and is limited to subscriptions to logs in your organisations. The `fly-logs` app is simply a Go NATS client that takes some Fly specific environment variables to connect to the stream, but any NATS client can connect to `fdaa::3` on port `4223` in a Fly vm, with an organisation slug as the username and a Fly Personal Access Token as the password.
 
-The subject schema is `logs.<app_name>.<region>.<instance_id>` and the standard [NATS wildcards](https://docs.nats.io/nats-concepts/subjects#wildcards) can be used. In this app, the `SUBJECT` secret can be used to set the topic and limit the scope of the logs streamed.
+The subject schema is `logs.<app_name>.<region>.<instance_id>` and the standard [NATS wildcards](https://docs.nats.io/nats-concepts/subjects#wildcards) can be used. In this app, the `SUBJECT` secret can be used to set the subject and limit the scope of the logs streamed.
 
 If you would like to run multiple vm's for high availability, the NATS endpoint supports [subscription queues](https://docs.nats.io/nats-concepts/queue) to ensure messages are only sent to one subscriber of the named queue. The `QUEUE` secret can be set to configure a queue name for the client. 
 
