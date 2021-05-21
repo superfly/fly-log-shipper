@@ -41,10 +41,10 @@ func printMsg(m *nats.Msg) {
 func main() {
 	var user = os.Getenv("ORG")
 	var password = os.Getenv("ACCESS_TOKEN")
-	var topic = os.Getenv("TOPIC")
+	var subject = os.Getenv("SUBJECT")
 	var queue = os.Getenv("QUEUE")
-	if topic == "" {
-		topic = "logs.>"
+	if subject == "" {
+		subject = "logs.>"
 	}
 	var urls = fmt.Sprintf("nats://%s:%s@[fdaa::3]:4223", user, password)
 	var showHelp = flag.Bool("h", false, "Show help message")
@@ -68,11 +68,11 @@ func main() {
 	}
 
 	if queue != "" {
-		nc.QueueSubscribe(topic, queue, func(msg *nats.Msg) {
+		nc.QueueSubscribe(subject, queue, func(msg *nats.Msg) {
 			printMsg(msg)
 		})
 	}
-	nc.Subscribe(topic, func(msg *nats.Msg) {
+	nc.Subscribe(subject, func(msg *nats.Msg) {
 		printMsg(msg)
 	})
 	nc.Flush()
