@@ -1,17 +1,24 @@
-FROM golang:1.15.7-buster
+FROM golang:1.16 as flylogs
 WORKDIR /go/src/github.com/superfly/fly-log-stream
 
 ENV BUILD_DEPS="gettext"  \
     RUNTIME_DEPS="libintl" \
     GO111MODULE=on
-
 COPY . .
-RUN mkdir -p /etc/vector
-COPY vector-configs/* /etc/vector/
-RUN curl --proto '=https' --tlsv1.2 -sSf -o /tmp/install_vector.sh https://sh.vector.dev 
-RUN apt-get update && apt-get install -y socat
 RUN go get
-RUN CGO_ENABLED=0 GOOS=linux go build -v -o /usr/local/bin/fly-logs main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o fly-logs main.go
+
+
+RUN curl --proto '=https' --tlsv1.2 -sSf -o /tmp/install_vector.sh https://sh.vector.dev
 RUN sh /tmp/install_vector.sh -y
-RUN cp /root/.vector/bin/vector /usr/local/bin/vector
-CMD bash start-fly-log-transporter.sh
+
+FROM ubuntu:xenial
+
+RUN mkdir -p /etc/vector
+COPY . .
+COPY vector-configs/* /etc/vector/ 
+RUN apt-get update && apt-get install -y socat ca-certificates
+COPY --from=flylogs /root/.vector/bin/vector /usr/local/bin/vector
+COPY --from=flylogs /go/src/github.com/superfly/fly-log-stream/fly-logs /usr/local/bin/fly-logs
+COPY --from=flylogs /etc/ssl/certs/* /etc/ssl/certs
+CMD ["bash", "start-fly-log-transporter.sh"]
