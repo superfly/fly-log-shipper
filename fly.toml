@@ -1,6 +1,6 @@
 # fly.toml file generated for vector on 2021-05-18T15:06:13+01:00
 
-app = "fly-log-shipper"
+app = "vector"
 
 kill_signal = "SIGINT"
 kill_timeout = 5

@@ -27,4 +27,4 @@ data_dir = "/var/lib/vector/"
 [sinks.blackhole]
   type = "blackhole"
   inputs = ["log_json"]
-  
+  print_amount = 100000
