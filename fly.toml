@@ -1,4 +1,4 @@
-# fly.toml file generated for vector on 2021-05-18T15:06:13+01:00
+# fly.toml file generated for log-shipper on 2021-05-24T22:46:08+02:00
 
 app = "fly-log-shipper-example"
 
@@ -9,13 +9,14 @@ kill_timeout = 5
   allowed_public_ports = []
   auto_rollback = true
 
+
 [metrics]
   port = 9598
   path = "/metrics"
 
 [[services]]
   http_checks = []
-  internal_port = 8080
+  internal_port = 8686
   protocol = "tcp"
   script_checks = []
 
@@ -23,3 +24,9 @@ kill_timeout = 5
     hard_limit = 25
     soft_limit = 20
     type = "connections"
+
+  [[services.tcp_checks]]
+    grace_period = "3s"
+    interval = "15s"
+    restart_limit = 6
+    timeout = "2s"

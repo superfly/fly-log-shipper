@@ -13,7 +13,8 @@ if [ ! -z "$NEW_RELIC_INSERT_KEY" ] || [ ! -z "$NEW_RELIC_LICENSE_KEY" ]; then
   [[ ! -z "$NEW_RELIC_LICENSE_KEY" ]] && echo "  license_key = \"${NEW_RELIC_LICENSE_KEY}\"" >> /etc/vector/vector.toml 
 fi
 [[ ! -z "$PAPERTRAIL_ENDPOINT" ]] && cat /etc/vector/papertrail.toml >> /etc/vector/vector.toml 
-[[ ! -z "$SEMATEXT_TOKEN" ]] && cat /etc/vector/sematext.toml >> /etc/vector/vector.toml 
+[[ ! -z "$SEMATEXT_TOKEN" ]] && cat /etc/vector/sematext.toml >> /etc/vector/vector.toml
+[[ ! -z "$UPTRACE_API_KEY" ]] && [[ ! -z "$UPTRACE_PROJECT" ]] && cat /etc/vector/uptrace.toml >> /etc/vector/vector.toml
 
 vector -c /etc/vector/vector.toml &
 while [ ! -e /var/run/vector.sock ]; do

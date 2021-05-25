@@ -2,6 +2,7 @@ data_dir = "/var/lib/vector/"
 
 [api]
   enabled = true
+  address = "0.0.0.0:8686"
 
 [sources.fly_log_metrics]
   type = "internal_metrics"

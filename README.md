@@ -73,6 +73,14 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | `SEMATEXT_REGION` | Sematext region |
 | `SEMATEXT_TOKEN`  | Sematext token  |
 
+
+### Uptrace
+
+| Secret            | Description        |
+| ----------------- | ------------------ |
+| `UPTRACE_API_KEY` | Uptrace API key    |
+| `UPTRACE_PROJECT` | Uptrace project ID |
+
 ---
 
 # NATS
