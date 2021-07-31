@@ -8,7 +8,7 @@ trap 'kill $(jobs -p)' EXIT
 [[ ! -z "$HUMIO_TOKEN" ]] && cat /etc/vector/honeycomb.toml >> /etc/vector/vector.toml 
 [[ ! -z "$LOGDNA_API_KEY" ]] && cat /etc/vector/logdna.toml >> /etc/vector/vector.toml 
 if [ ! -z "$NEW_RELIC_INSERT_KEY" ] || [ ! -z "$NEW_RELIC_LICENSE_KEY" ]; then
-  cat /etc/vector/honeycomb.toml >> /etc/vector/vector.toml 
+  cat /etc/vector/new-relic.toml >> /etc/vector/vector.toml 
   [[ ! -z "$NEW_RELIC_INSERT_KEY" ]] && echo "  insert_key = \"${NEW_RELIC_INSERT_KEY}\"" >> /etc/vector/vector.toml 
   [[ ! -z "$NEW_RELIC_LICENSE_KEY" ]] && echo "  license_key = \"${NEW_RELIC_LICENSE_KEY}\"" >> /etc/vector/vector.toml 
 fi
