@@ -82,6 +82,14 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `UPTRACE_API_KEY` | Uptrace API key    |
 | `UPTRACE_PROJECT` | Uptrace project ID |
 
+### EraSearch
+
+| Secret                  | Description                                  |
+| ----------------------- | -------------------------------------------- |
+| `ERASERACH_URL`         | EraSearch Endpoint                           |   
+| `ERASERACH_USER`        | EraSerach User                               |
+| `ERASERACH_PWD`         | EraSerach Password                           |
+| `ERASERACH_INDEX`       | EraSerach Index you want to use              |
 ---
 
 # NATS
