@@ -1,10 +1,10 @@
 [sinks.erasearch]
-  type="elasticsearch
+  type="elasticsearch"
   inputs = ["log_json"]
-  endpoint="${erasearch_url}"
-  auth.user="${eraserach_user}"
-  auth.password="${erasearch_password}"
+  endpoint="${ERASERACH_URL}"
+  auth.user="${ERASERACH_USER}"
+  auth.password="${ERASEARCH_PWD}"
   auth.strategy="basic"
   healthcheck.enabled = false
   request.concurrency = "adaptive"
-  index = "${erasearch_index}"
+  index = "${ERASERACH_INDEX}"
