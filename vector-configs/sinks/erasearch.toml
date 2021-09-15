@@ -1,5 +1,5 @@
 [sinks.erasearch]
-  type="elasticsearch
+  type="elasticsearch"
   inputs = ["log_json"]
   endpoint="${erasearch_url}"
   auth.user="${eraserach_user}"
