@@ -1,6 +1,18 @@
+[transforms.trf_json]
+  type = "remap"
+  inputs = ["log_json"]
+  source = ```
+  if starts_with(.message, "{") {
+   # parse json messages
+    json = object!(parse_json!(.message))
+    del(.message)
+    . |= json
+  }
+  ```
+
 [sinks.erasearch]
   type="elasticsearch"
-  inputs = ["log_json"]
+  inputs = ["trf_json"]
   endpoint="${ERASERACH_URL}"
   auth.user="${ERASERACH_USER}"
   auth.password="${ERASEARCH_PWD}"
