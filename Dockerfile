@@ -1,4 +1,4 @@
-FROM golang:1.16 as flylogs
+FROM golang:1.17 as flylogs
 WORKDIR /go/src/github.com/superfly/fly-log-stream
 
 ENV BUILD_DEPS="gettext"  \
@@ -12,7 +12,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -v -o fly-logs main.go
 RUN curl --proto '=https' --tlsv1.2 -sSf -o /tmp/install_vector.sh https://sh.vector.dev
 RUN sh /tmp/install_vector.sh -y
 
-FROM ubuntu:xenial
+FROM ubuntu:18.04
 
 RUN mkdir -p /etc/vector
 COPY . .
