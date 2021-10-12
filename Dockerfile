@@ -12,7 +12,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -v -o fly-logs main.go
 RUN curl --proto '=https' --tlsv1.2 -sSf -o /tmp/install_vector.sh https://sh.vector.dev
 RUN sh /tmp/install_vector.sh -y
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN mkdir -p /etc/vector
 COPY . .
