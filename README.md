@@ -53,6 +53,12 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | ---------------- | -------------- |
 | `LOGDNA_API_KEY` | LogDNA API key |
 
+### Logtail
+
+| Secret          | Description        |
+| --------------- | ------------------ |
+| `LOGTAIL_TOKEN` | Logtail auth token |
+
 ### New Relic
 One of these is required for New Relic logs. New Relic recommend the license key be used (ref: https://docs.newrelic.com/docs/logs/enable-log-management-new-relic/enable-log-monitoring-new-relic/vector-output-sink-log-forwarding/)
 
