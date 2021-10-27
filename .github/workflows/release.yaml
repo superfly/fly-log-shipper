@@ -13,7 +13,7 @@ jobs:
   push_to_registry:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       packages: write
     name: Push image
   
@@ -42,14 +42,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Release
-        id: release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
