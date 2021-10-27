@@ -13,7 +13,7 @@ jobs:
   push_to_registry:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
     name: Push image
   
