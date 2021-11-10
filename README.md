@@ -53,6 +53,13 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | ---------------- | -------------- |
 | `LOGDNA_API_KEY` | LogDNA API key |
 
+### Logflare
+
+| Secret                  | Description                                             |
+| ----------------------- | ------------------------------------------------------- |
+| `LOGFLARE_API_KEY`      | Logflare ingest API key                                 |
+| `LOGFLARE_SOURCE_TOKEN` | Logflare source token (uuid on your Logflare dashboard) |
+
 ### Logtail
 
 | Secret          | Description        |
