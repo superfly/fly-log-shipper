@@ -19,7 +19,6 @@ fi
 [[ ! -z "$LOGFLARE_API_KEY" ]] && [[ ! -z "$LOGFLARE_SOURCE_TOKEN" ]] && cat /etc/vector/logflare.toml >> /etc/vector/vector.toml
 [[ ! -z "$ERASEARCH_URL" ]] && [[ ! -z "$ERASEARCH_INDEX" ]] && cat /etc/vector/erasearch.toml >> /etc/vector/vector.toml
 
-
 vector -c /etc/vector/vector.toml &
 while [ ! -e /var/run/vector.sock ]; do
   sleep 0.5
