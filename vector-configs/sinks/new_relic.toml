@@ -3,3 +3,4 @@
   type = "new_relic_logs"
   inputs = ["log_json"]
   compression = "gzip" 
+

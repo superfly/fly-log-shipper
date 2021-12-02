@@ -4,3 +4,4 @@
   uri = "https://api.logflare.app/logs/vector?api_key=${LOGFLARE_API_KEY}&source=${LOGFLARE_SOURCE_TOKEN}"
   encoding.codec = "json"
   compression = "none"
+
