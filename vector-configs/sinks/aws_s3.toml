@@ -8,3 +8,4 @@
   encoding.codec = "ndjson"
   key_prefix = "{{fly.app.name}}/%F/" # optional, default
   healthcheck.enabled = true # optional, default
+
