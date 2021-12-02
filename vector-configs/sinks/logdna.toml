@@ -4,3 +4,4 @@
   inputs = ["log_json"] # required
   api_key = "${LOGDNA_API_KEY}" # required
   hostname = "{{fly.app.instance}}"
+
