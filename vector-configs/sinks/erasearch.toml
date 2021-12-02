@@ -1,0 +1,24 @@
+[transforms.trf_json]
+  type = "remap"
+  inputs = ["log_json"]
+  source = ```
+  if starts_with(.message, "{") {
+   # parse json messages
+    json = object!(parse_json!(.message))
+    del(.message)
+    . |= json
+  }
+  ```
+
+[sinks.erasearch]
+  type="elasticsearch"
+  inputs = ["trf_json"]
+  endpoint="${ERASEARCH_URL}"
+  request:
+    headers:
+      #ERASEARCH_AUTH in the form of "Bearer <YOUR_API_KEY>" for cloud.era.co
+      #ERASEARCH_AUTH in the form of "Basic <base64 username:password>" for basic Authorization
+      Authorization: "${ERASEARCH_AUTH}" 
+  healthcheck.enabled = false
+  request.concurrency = "adaptive"
+  index = "${ERASEARCH_INDEX}"
