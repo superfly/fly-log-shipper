@@ -86,10 +86,9 @@ One of these is required for New Relic logs. New Relic recommend the license key
 
 | Secret                  | Description                                  |
 | ----------------------- | -------------------------------------------- |
-| `ERASERACH_URL`         | EraSearch Endpoint                           |   
-| `ERASERACH_USER`        | EraSerach User                               |
-| `ERASERACH_PWD`         | EraSerach Password                           |
-| `ERASERACH_INDEX`       | EraSerach Index you want to use              |
+| `ERASEARCH_URL`         | EraSearch Endpoint                           |   
+| `ERASEARCH_AUTH`        | EraSearch User                               |
+| `ERASEARCH_INDEX`       | EraSearch Index you want to use              |
 ---
 
 # NATS

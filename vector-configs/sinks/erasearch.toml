@@ -13,10 +13,12 @@
 [sinks.erasearch]
   type="elasticsearch"
   inputs = ["trf_json"]
-  endpoint="${ERASERACH_URL}"
-  auth.user="${ERASERACH_USER}"
-  auth.password="${ERASEARCH_PWD}"
-  auth.strategy="basic"
+  endpoint="${ERASEARCH_URL}"
+  request:
+    headers:
+      #ERASEARCH_AUTH in the form of "Bearer <YOUR_API_KEY>" for cloud.era.co
+      #ERASEARCH_AUTH in the form of "Basic <base64 username:password>" for basic Authorization
+      Authorization: "${ERASEARCH_AUTH}" 
   healthcheck.enabled = false
   request.concurrency = "adaptive"
-  index = "${ERASERACH_INDEX}"
+  index = "${ERASEARCH_INDEX}"
