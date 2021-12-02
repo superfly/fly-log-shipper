@@ -5,3 +5,4 @@
   encoding.codec = "json"
   auth.strategy = "bearer"
   auth.token = "${LOGTAIL_TOKEN}"
+
