@@ -15,6 +15,8 @@ fi
 [[ ! -z "$PAPERTRAIL_ENDPOINT" ]] && cat /etc/vector/papertrail.toml >> /etc/vector/vector.toml 
 [[ ! -z "$SEMATEXT_TOKEN" ]] && cat /etc/vector/sematext.toml >> /etc/vector/vector.toml
 [[ ! -z "$UPTRACE_API_KEY" ]] && [[ ! -z "$UPTRACE_PROJECT" ]] && cat /etc/vector/uptrace.toml >> /etc/vector/vector.toml
+[[ ! -z "$LOGTAIL_TOKEN" ]] && cat /etc/vector/logtail.toml >> /etc/vector/vector.toml
+[[ ! -z "$LOGFLARE_API_KEY" ]] && [[ ! -z "$LOGFLARE_SOURCE_TOKEN" ]] && cat /etc/vector/logflare.toml >> /etc/vector/vector.toml
 [[ ! -z "$ERASEARCH_URL" ]] && [[ ! -z "$ERASEARCH_INDEX" ]] && cat /etc/vector/erasearch.toml >> /etc/vector/vector.toml
 
 vector -c /etc/vector/vector.toml &
