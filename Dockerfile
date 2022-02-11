@@ -21,4 +21,4 @@ RUN apt-get update && apt-get install -y socat ca-certificates
 COPY --from=flylogs /root/.vector/bin/vector /usr/local/bin/vector
 COPY --from=flylogs /go/src/github.com/superfly/fly-log-stream/fly-logs /usr/local/bin/fly-logs
 COPY --from=flylogs /etc/ssl/certs/* /etc/ssl/certs/
-CMD ["bash", "start-fly-log-transporter.sh"]
+CMD ["start-fly-log-transporter.sh"]
