@@ -2,8 +2,8 @@
   type = "remap"
   inputs = ["log_json"]
   source = '''
-  if starts_with(.message, "{") {
-   # parse json messages
+  if starts_with(.message, "{") ?? false {
+    # parse json messages
     json = object!(parse_json!(.message))
     del(.message)
     . |= json
