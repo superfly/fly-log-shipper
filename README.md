@@ -66,6 +66,14 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | --------------- | ------------------ |
 | `LOGTAIL_TOKEN` | Logtail auth token |
 
+### Loki
+
+| Secret          | Description   |
+| --------------- | ------------- |
+| `LOKI_URL`      | Loki Endpoint |
+| `LOKI_USERNAME` | Loki Username |
+| `LOKI_PASSWORD` | Loki Password |
+
 ### New Relic
 One of these is required for New Relic logs. New Relic recommend the license key be used (ref: https://docs.newrelic.com/docs/logs/enable-log-management-new-relic/enable-log-monitoring-new-relic/vector-output-sink-log-forwarding/)
 
@@ -102,6 +110,7 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `ERASEARCH_URL`         | EraSearch Endpoint                           |   
 | `ERASEARCH_AUTH`        | EraSearch User                               |
 | `ERASEARCH_INDEX`       | EraSearch Index you want to use              |
+
 ---
 
 # NATS
