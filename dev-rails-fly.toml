@@ -1,0 +1,10 @@
+app = "co2-logger"
+
+[env]
+  ORG="co2"
+  PAPERTRAIL_ENDPOINT="logs2.papertrailapp.com:32842"
+  SUBJECT="logs.dev-co2*"
+
+[metrics]
+  port = 9598
+  path = "/metrics"

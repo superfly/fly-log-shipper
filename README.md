@@ -4,7 +4,46 @@ Ship logs from fly to other providers using [NATS](https://docs.nats.io/) and [V
 
 Here we have some vector configs and a nats client (\`fly-logs\`), along side a wrapper script to run it all, that will subscribe to a log stream of your organisations logs, and ship it to various providers.
 
-# Configuration
+# CO2-specific Configuration
+
+## New Fly Logging App
+
+First, you will need to create a new `.toml` file for storing basic
+configuration for this Fly app. Cloning an existing file is the easiest path
+forward: `cp dev-rails-fly.toml my-new-fly-app.toml`.
+
+Now open the new `.toml` file to configure it for a new deployment. First, the
+value for `app` must be unique and match the name you'd like for the app.
+Second, edit the following values under the `[env]` section:
+| ENV Variable          | Description                                                                                                                                          |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PAPERTRAIL_ENDPOINT` | The port-based destination created via PaperTrail's "Add System" button on their [dashboard](https://papertrailapp.com/dashboard)                    |
+| `SUBJECT`             | Used to filter log messages to specific systems against Fly's [subject hierarchies](https://docs.nats.io/nats-concepts/subjects#subject-hierarchies) |
+
+Now we need to deploy the application using our new `.toml` file. To do this
+we'll need the "app" name defined at the top of the `.toml` file. Now we can
+create the app with the command: `flyctl apps create --name A_NAME_GOES_HERE`.
+
+The next task is to set an access token for `flyctl` to make use of. You can
+create a new access token from
+[this](https://fly.io/user/personal_access_tokens) page. Once the token is
+generated copy it and then set it with this command:  
+`flyctl secrets set ACCESS_TOKEN="MY_SECRET_ACCESS_TOKEN"`.
+
+Finally, we can deploy the app with `flyctl deploy -c my-new-fly-app.toml`. In
+this case, the `-c` flag is indicating a specific `.toml` file to use for the
+deployment. Additional info on the `-c` flag can be found at the
+[fly docs](https://fly.io/docs/reference/configuration/#the-app-name).
+
+## Redeploy Existing Fly Logging App
+
+Redeploying an existing app should be as simple as identifying the correct
+`.toml` file and running: `flyctl deploy -c relevantfly-app.toml`.
+
+# Generic Configuration
+
+**The documentation below is from the original repository and is left as-is to
+provide additional information.**
 
 Create a new Fly app based on this Dockerfile and configure using the following secrets:
 
