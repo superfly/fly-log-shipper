@@ -14,19 +14,20 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | -------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `ORG`          | Organisation slug                                                                                                |
 | `ACCESS_TOKEN` | Fly personal access token                                                                                        |
-| `SUBJECT`        | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                             |
+| `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
 | `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped |
 
 ## Provider configuration
 
 ### AWS S3
 
-| Secret                  | Description                                  |
-| ----------------------- | -------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | AWS Access key with access to the log bucket |
-| `AWS_SECRET_ACCESS_KEY` | AWS secret access key                        |
-| `AWS_BUCKET`            | AWS S3 bucket to store logs in               |
-| `AWS_REGION`            | Region for the bucket                        |
+| Secret                  | Description                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | AWS Access key with access to the log bucket                                            |
+| `AWS_SECRET_ACCESS_KEY` | AWS secret access key                                                                   |
+| `AWS_BUCKET`            | AWS S3 bucket to store logs in                                                          |
+| `AWS_REGION`            | Region for the bucket                                                                   |
+| `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
 
 ### Datadog
 
@@ -75,6 +76,7 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | `LOKI_PASSWORD` | Loki Password |
 
 ### New Relic
+
 One of these is required for New Relic logs. New Relic recommend the license key be used (ref: https://docs.newrelic.com/docs/logs/enable-log-management-new-relic/enable-log-monitoring-new-relic/vector-output-sink-log-forwarding/)
 
 | Secret                  | Description                      |
@@ -95,7 +97,6 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `SEMATEXT_REGION` | Sematext region |
 | `SEMATEXT_TOKEN`  | Sematext token  |
 
-
 ### Uptrace
 
 | Secret            | Description        |
@@ -105,11 +106,11 @@ One of these is required for New Relic logs. New Relic recommend the license key
 
 ### EraSearch
 
-| Secret                  | Description                                  |
-| ----------------------- | -------------------------------------------- |
-| `ERASEARCH_URL`         | EraSearch Endpoint                           |   
-| `ERASEARCH_AUTH`        | EraSearch User                               |
-| `ERASEARCH_INDEX`       | EraSearch Index you want to use              |
+| Secret            | Description                     |
+| ----------------- | ------------------------------- |
+| `ERASEARCH_URL`   | EraSearch Endpoint              |
+| `ERASEARCH_AUTH`  | EraSearch User                  |
+| `ERASEARCH_INDEX` | EraSearch Index you want to use |
 
 ---
 
