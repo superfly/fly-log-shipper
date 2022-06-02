@@ -71,10 +71,11 @@ func main() {
 		nc.QueueSubscribe(subject, queue, func(msg *nats.Msg) {
 			printMsg(msg)
 		})
+	} else {
+		nc.Subscribe(subject, func(msg *nats.Msg) {
+			printMsg(msg)
+		})
 	}
-	nc.Subscribe(subject, func(msg *nats.Msg) {
-		printMsg(msg)
-	})
 	nc.Flush()
 
 	if err := nc.LastError(); err != nil {
