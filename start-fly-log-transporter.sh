@@ -3,7 +3,10 @@ set -e
 trap 'kill $(jobs -p)' EXIT
 
 [[ ! -z "$DATADOG_API_KEY" ]] && cat /etc/vector/datadog.toml >> /etc/vector/vector.toml
-[[ ! -z "$AWS_ACCESS_KEY_ID" ]] && [[ ! -z "$AWS_BUCKET" ]] && cat /etc/vector/aws_s3.toml >> /etc/vector/vector.toml
+if [ ! -z "$AWS_ACCESS_KEY_ID" ] && [ ! -z "$AWS_BUCKET" ]; then
+  cat /etc/vector/aws_s3.toml >> /etc/vector/vector.toml 
+  [[ ! -z "$S3_ENDPOINT" ]] && echo "  endpoint = \"${S3_ENDPOINT}\"" >> /etc/vector/vector.toml 
+fi
 [[ ! -z "$HONEYCOMB_API_KEY" ]] && cat /etc/vector/honeycomb.toml >> /etc/vector/vector.toml 
 [[ ! -z "$HUMIO_TOKEN" ]] && cat /etc/vector/humio.toml >> /etc/vector/vector.toml 
 [[ ! -z "$LOGDNA_API_KEY" ]] && cat /etc/vector/logdna.toml >> /etc/vector/vector.toml 
