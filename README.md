@@ -35,6 +35,14 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | ----------------- | -------------------------------- |
 | `DATADOG_API_KEY` | API key for your Datadog account |
 
+### Gravwell
+
+| Secret           | Description                         |
+| ---------------- | ----------------------------------- |
+| `GRAVWELL_URL`   | Grawvell URL (no trailing slash)    |
+| `GRAVWELL_TAG`   | Gravwell tag name                   |
+| `GRAVWELL_TOKEN` | Gravwell API token                  |
+
 ### Honeycomb
 
 | Secret              | Description       |

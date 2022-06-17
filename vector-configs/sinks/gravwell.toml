@@ -1,0 +1,23 @@
+[transforms.gravwell_json]
+  type = "remap"
+  inputs = ["log_json"]
+  source = """
+  if starts_with(.message, "{") ?? false {
+    .message = object!(parse_json!(.message))
+  }
+  . = [
+    object({
+      "TS": now(),
+      "Tag": "${GRAVWELL_TAG:?must supply Gravwell tag}",
+      "Data": encode_base64(encode_json(.)),
+    })
+  ]
+  """
+
+[sinks.gravwell]
+  type = "http"
+  method = "put"
+  uri = "${GRAVWELL_URL?:must supply Gravwell url}/api/ingest/json"
+  encoding = "json"
+  inputs = ["gravwell_json"]
+  request.headers = { "Gravwell-Token" = "${GRAVWELL_TOKEN?:must supply Gravwell token}" }
