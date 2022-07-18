@@ -29,6 +29,17 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 | `AWS_REGION`            | Region for the bucket                                                                   |
 | `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
 
+
+### AWS CloudWatch
+
+| Secret                  | Description                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | AWS Access key with access to the log bucket                                            |
+| `AWS_SECRET_ACCESS_KEY` | AWS secret access key                                                                   |
+| `AWS_REGION`            | Region for CloudWatch                                                                 |
+| `CLOUDWATCH_LOG_GROUP_NAME`           | Log Group to send logs to in CloudWatch |
+
+
 ### Datadog
 
 | Secret            | Description                      |
