@@ -31,9 +31,10 @@ Create a new Fly app based on this Dockerfile and configure using the following 
 
 ### Datadog
 
-| Secret            | Description                      |
-| ----------------- | -------------------------------- |
-| `DATADOG_API_KEY` | API key for your Datadog account |
+| Secret            | Description                        |
+| ----------------- | ---------------------------------- |
+| `DATADOG_API_KEY` | API key for your Datadog account   |
+| `DATADOG_SITE`    | The Datadog site to send data to   |
 
 ### Honeycomb
 
