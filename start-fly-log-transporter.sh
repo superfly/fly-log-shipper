@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-trap 'kill $(jobs -p)' EXIT
 
 [[ ! -z "$DATADOG_API_KEY" ]] && cat /etc/vector/datadog.toml >> /etc/vector/vector.toml
 if [ ! -z "$AWS_ACCESS_KEY_ID" ] && [ ! -z "$AWS_BUCKET" ]; then
@@ -23,8 +22,4 @@ fi
 [[ ! -z "$ERASEARCH_URL" ]] && [[ ! -z "$ERASEARCH_INDEX" ]] && [[ ! -z "$ERASEARCH_AUTH" ]] && cat /etc/vector/erasearch.toml >> /etc/vector/vector.toml
 [[ ! -z "$LOKI_URL" ]] && [[ ! -z "$LOKI_USERNAME" ]] && [[ ! -z "$LOKI_PASSWORD" ]] && cat /etc/vector/loki.toml >> /etc/vector/vector.toml
 
-vector -c /etc/vector/vector.toml &
-while [ ! -e /var/run/vector.sock ]; do
-  sleep 0.5
-done
-/usr/local/bin/fly-logs | socat -u - UNIX-CONNECT:/var/run/vector.sock
+exec vector -c /etc/vector/vector.toml
