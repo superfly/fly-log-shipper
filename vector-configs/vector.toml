@@ -1,5 +1,3 @@
-data_dir = "/var/lib/vector/"
-
 [api]
   enabled = true
   address = "0.0.0.0:8686"
@@ -7,14 +5,19 @@ data_dir = "/var/lib/vector/"
 [sources.fly_log_metrics]
   type = "internal_metrics"
 
-[sources.fly_socket]
-  type = "socket"
-  mode = "unix" 
-  path = "/var/run/vector.sock"
+[sources.nats]
+  type = "nats"
+  url = "nats://[fdaa::3]:4223"
+  queue = "${QUEUE-}"
+  subject = "${SUBJECT-logs.>}"
+  auth.strategy = "user_password"
+  auth.user_password.user = "${ORG-personal}"
+  auth.user_password.password = "${ACCESS_TOKEN?}"
+  connection_name = "Fly logs stream"
 
 [transforms.log_json]
   type = "remap"
-  inputs = ["fly_socket"]
+  inputs = ["nats"]
   source = '''
   . = parse_json!(.message)
   '''
