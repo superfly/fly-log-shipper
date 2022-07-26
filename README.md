@@ -2,18 +2,19 @@
 
 Ship logs from fly to other providers using [NATS](https://docs.nats.io/) and [Vector](https://vector.dev/)
 
-Here we have some vector configs and a nats client (\`fly-logs\`), along side a wrapper script to run it all, that will subscribe to a log stream of your organisations logs, and ship it to various providers.
+Here we have some vector configs, alongside a wrapper script to run it all,
+that will subscribe to a log stream of your organisation's logs and ship it to various providers.
 
 # Configuration
 
-Create a new Fly app based on this Dockerfile and configure using the following secrets:
+Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure using the following secrets:
 
-## fly-logs configuration
+## NATS source configuration
 
 | Secret         | Description                                                                                                      |
-| -------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ORG`          | Organisation slug                                                                                                |
-| `ACCESS_TOKEN` | Fly personal access token                                                                                        |
+| -------------- |------------------------------------------------------------------------------------------------------------------|
+| `ORG`          | Organisation slug (default to `personal`)                                                                        |
+| `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly auth token)`)                  |
 | `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
 | `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped |
 
@@ -116,14 +117,25 @@ One of these is required for New Relic logs. New Relic recommend the license key
 
 # NATS
 
-The log stream is provided through the [NATS protocol](https://docs.nats.io/nats-protocol/nats-protocol) and is limited to subscriptions to logs in your organisations. The `fly-logs` app is simply a Go NATS client that takes some Fly specific environment variables to connect to the stream, but any NATS client can connect to `fdaa::3` on port `4223` in a Fly vm, with an organisation slug as the username and a Fly Personal Access Token as the password.
+The log stream is provided through the [NATS protocol](https://docs.nats.io/nats-protocol/nats-protocol)
+and is limited to subscriptions to logs in your organisations.
+The NATS source takes some Fly specific environment variables to connect to the stream,
+but any NATS client can connect to `fdaa::3` on port `4223` in a Fly vm,
+with an organisation slug as the username and a Fly Personal Access Token as the password.
 
-The subject schema is `logs.<app_name>.<region>.<instance_id>` and the standard [NATS wildcards](https://docs.nats.io/nats-concepts/subjects#wildcards) can be used. In this app, the `SUBJECT` secret can be used to set the subject and limit the scope of the logs streamed.
+The subject schema is `logs.<app_name>.<region>.<instance_id>` and the standard
+[NATS wildcards](https://docs.nats.io/nats-concepts/subjects#wildcards) can be used.
+In this app, the `SUBJECT` secret can be used to set the subject and limit the scope of the logs streamed.
 
-If you would like to run multiple vm's for high availability, the NATS endpoint supports [subscription queues](https://docs.nats.io/nats-concepts/queue) to ensure messages are only sent to one subscriber of the named queue. The `QUEUE` secret can be set to configure a queue name for the client.
+If you would like to run multiple vm's for high availability, the NATS endpoint supports
+[subscription queues](https://docs.nats.io/nats-concepts/queue) to ensure messages are only sent to one
+subscriber of the named queue. The `QUEUE` secret can be set to configure a queue name for the client.
 
 ---
 
 # Vector
 
-The `fly-logs` application sends logs to a unix socket which is created by Vector. This processes the log lines and sends them to various providers. The config is generated from a shell wrapper script which uses conditionals on environment variables to decide which Vector sinks to configure in the final config.
+The `nats` source component sends logs to other downstream transforms and sinks in the Vector config.
+This processes the log lines and sends them to various providers.
+The config is generated from a shell wrapper script which uses conditionals on environment variables to
+decide which Vector sinks to configure in the final config.
