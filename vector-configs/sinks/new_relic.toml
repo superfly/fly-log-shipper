@@ -2,5 +2,7 @@
   # General
   type = "new_relic_logs"
   inputs = ["log_json"]
-  compression = "gzip" 
-
+  compression = "gzip"
+  # Key: ${NEW_RELIC_LICENSE_KEY-$NEW_RELIC_INSERT_KEY}
+  ${NEW_RELIC_LICENSE_KEY+license_key = \"$NEW_RELIC_LICENSE_KEY\"}
+  ${NEW_RELIC_INSERT_KEY+insert_key = \"$NEW_RELIC_INSERT_KEY\"}
