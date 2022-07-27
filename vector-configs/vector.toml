@@ -5,6 +5,13 @@
 [sources.fly_log_metrics]
   type = "internal_metrics"
 
+[sources.org_metrics]
+type = "prometheus_scrape"
+endpoints = ["https://api.fly.io/prometheus/${ORG-personal}/federate"]
+query.match = ['{__name__!=""}']
+auth.strategy = "bearer"
+auth.token = "${ACCESS_TOKEN?}"
+
 [sources.nats]
   type = "nats"
   url = "nats://[fdaa::3]:4223"
