@@ -1,0 +1,12 @@
+[sinks.aws_cloudwatch]
+  type = "aws_cloudwatch_logs"
+  inputs = [ "log_json" ]
+  create_missing_group = true
+  create_missing_stream = true
+  group_name = "${CLOUDWATCH_LOG_GROUP_NAME}"
+  compression = "none"
+  region = "${AWS_REGION}"
+  stream_name = "{{ fly.app.name }}/{{ host }}"
+
+[sinks.aws_cloudwatch.encoding]
+  codec = "json"
