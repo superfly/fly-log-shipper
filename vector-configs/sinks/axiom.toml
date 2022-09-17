@@ -1,0 +1,6 @@
+[sinks.axiom]
+  type = "axiom"
+  inputs = ["log_json"]
+  token = "${AXIOM_TOKEN}"
+  dataset = "${AXIOM_DATASET}"
+
