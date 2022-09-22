@@ -2,17 +2,27 @@
 
 Ship logs from fly to other providers using [NATS](https://docs.nats.io/) and [Vector](https://vector.dev/)
 
-Here we have some vector configs, alongside a wrapper script to run it all,
-that will subscribe to a log stream of your organisation's logs and ship it to various providers.
+In this repo you will find various [Vector Sinks](https://vector.dev/docs/reference/configuration/sinks/) along with the required fly config. The end result is a Fly.IO application that automatically reads your organisation logs and sends them to external providers.
 
-# Configuration
+# Quick start
 
-Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure using the following secrets:
+1. Create a new fly logger app based on our docker image
+
+```
+fly launch --image ghcr.io/superfly/fly-log-shipper:latest
+```
+
+2. Set [NATS source secrets](#nats-source-configuration) for your new app
+3. Set your desired [provider](#provider-configuration) from below
+
+**Thats it** - no need to setup NATs clients within your apps, as fly apps are already sending monitoring information back to fly which we can read.
+
+However for advanced uses you can still configure a NATs client in your apps to talk to this NATs server. See [NATS](#nats)
 
 ## NATS source configuration
 
 | Secret         | Description                                                                                                      |
-| -------------- |------------------------------------------------------------------------------------------------------------------|
+| -------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `ORG`          | Organisation slug (default to `personal`)                                                                        |
 | `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly auth token)`)                  |
 | `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
@@ -117,15 +127,51 @@ One of these is required for New Relic logs. New Relic recommend the license key
 
 # NATS
 
-The log stream is provided through the [NATS protocol](https://docs.nats.io/nats-protocol/nats-protocol)
-and is limited to subscriptions to logs in your organisations.
-The NATS source takes some Fly specific environment variables to connect to the stream,
-but any NATS client can connect to `fdaa::3` on port `4223` in a Fly vm,
-with an organisation slug as the username and a Fly Personal Access Token as the password.
+The log stream is provided through the [NATS protocol](https://docs.nats.io/nats-protocol/nats-protocol) and is limited to subscriptions to logs in your organisations.
+
+## Connecting
+
+> Note: You do **not** have to manually connect a NAT Client, see [Quick Start](#quick-start)
+
+If you want to add custom behaviours or modify the subject sent from your app, then you can connect your app to the NATs server manually.
+
+Any fly app can connect to the NATs server on `nats://[fdaa::3]:4223` (IPV6).
+
+**Note: you will need to supply a user / password.**
+
+> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Pass**: is your fly token, which you can obtain from `fly auth token`
+
+#### Example using the NATs client
+
+Launch a nats client based on the nats-server image
+
+```
+fly launch --image="synadia/nats-server:nightly" --name="nats-client"
+```
+
+SSH into the new app
+
+```
+fly -a nats-client ssh console
+```
+
+```
+nats context add nats --server [fdaa::3]:4223 --description "NATS Demo" --select \
+   --user <YOUR FLY ORG SLUG>
+   --pass <YOUR PAT>
+```
+
+```
+nats pub "logs.test" "hello world"
+```
+
+## Subject
 
 The subject schema is `logs.<app_name>.<region>.<instance_id>` and the standard
 [NATS wildcards](https://docs.nats.io/nats-concepts/subjects#wildcards) can be used.
 In this app, the `SUBJECT` secret can be used to set the subject and limit the scope of the logs streamed.
+
+## Queue
 
 If you would like to run multiple vm's for high availability, the NATS endpoint supports
 [subscription queues](https://docs.nats.io/nats-concepts/queue) to ensure messages are only sent to one
