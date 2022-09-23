@@ -32,9 +32,10 @@ Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure usin
 
 ### Datadog
 
-| Secret            | Description                      |
-| ----------------- | -------------------------------- |
-| `DATADOG_API_KEY` | API key for your Datadog account |
+| Secret            | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `DATADOG_API_KEY` | API key for your Datadog account              |
+| `DATADOG_SITE`    | (optional) The Datadog site. ie: datadoghq.eu |
 
 ### Honeycomb
 
