@@ -1,5 +1,8 @@
-app = "fly-log-shipper-example"
+app = "logtail-log-shipper"
 
 [metrics]
   port = 9598
   path = "/metrics"
+
+[env]
+  ORG = "udisc"
