@@ -46,9 +46,10 @@ Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure usin
 
 ### Humio
 
-| Secret        | Description |
-| ------------- | ----------- |
-| `HUMIO_TOKEN` | Humio token |
+| Secret           | Description                             |
+| ---------------- | --------------------------------------- |
+| `HUMIO_TOKEN`    | Humio token                             |
+| `HUMIO_ENDPOINT` | (optional) Endpoint URL to send logs to |
 
 ### Logdna
 
