@@ -30,6 +30,13 @@ Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure usin
 | `AWS_REGION`            | Region for the bucket                                                                   |
 | `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
 
+### Axiom
+
+| Secret          | Description   |
+| ----------------| --------------|
+| `AXIOM_TOKEN`   | Axiom token   |
+| `AXIOM_DATASET` | Axiom dataset |
+
 ### Datadog
 
 | Secret            | Description                                   |

@@ -27,5 +27,6 @@ fi
 [[ ! -z "$LOGFLARE_API_KEY" ]] && [[ ! -z "$LOGFLARE_SOURCE_TOKEN" ]] && cat /etc/vector/logflare.toml >> /etc/vector/vector.toml
 [[ ! -z "$ERASEARCH_URL" ]] && [[ ! -z "$ERASEARCH_INDEX" ]] && [[ ! -z "$ERASEARCH_AUTH" ]] && cat /etc/vector/erasearch.toml >> /etc/vector/vector.toml
 [[ ! -z "$LOKI_URL" ]] && [[ ! -z "$LOKI_USERNAME" ]] && [[ ! -z "$LOKI_PASSWORD" ]] && cat /etc/vector/loki.toml >> /etc/vector/vector.toml
+[[ ! -z "$AXIOM_TOKEN" ]] && [[ ! -z "$AXIOM_DATASET" ]] && cat /etc/vector/axiom.toml >> /etc/vector/vector.toml
 
 exec vector -c /etc/vector/vector.toml
