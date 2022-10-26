@@ -18,6 +18,19 @@ Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure usin
 | `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
 | `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped |
 
+After generating your `fly.toml`, remember to update the internal port to match the `vector` internal port
+defined in `vector-configs/vector.toml`. Not doing so will result in health checks failing on deployment.
+
+```
+[[services]]
+  http_checks = []
+  internal_port = 8686
+```
+
+----
+
+Set the secrets below associated with your desired log destination
+
 ## Provider configuration
 
 ### AWS S3
