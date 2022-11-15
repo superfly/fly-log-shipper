@@ -3,6 +3,7 @@
   type = "datadog_logs" # required
   inputs = ["log_json"] # required
   api_key = "${DATADOG_API_KEY}" # required
+  site = "${DATADOG_SITE:-datadoghq.com}" # optional
   compression = "gzip" # optional, default
 
   # Healthcheck
