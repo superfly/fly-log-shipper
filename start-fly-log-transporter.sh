@@ -3,7 +3,6 @@ set -e
 
 if [ ! -z "$DATADOG_API_KEY" ]; then 
    cat /etc/vector/datadog.toml >> /etc/vector/vector.toml
-  [[ ! -z "$DATADOG_SITE" ]] && echo "  site = \"${DATADOG_SITE}\"" >> /etc/vector/vector.toml 
 fi
 if [ ! -z "$AWS_ACCESS_KEY_ID" ] && [ ! -z "$AWS_BUCKET" ]; then
   cat /etc/vector/aws_s3.toml >> /etc/vector/vector.toml 
