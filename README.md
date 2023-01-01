@@ -161,9 +161,9 @@ Any fly app can connect to the NATs server on `nats://[fdaa::3]:4223` (IPV6).
 
 **Note: you will need to supply a user / password.**
 
-> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Pass**: is your fly token, which you can obtain from `fly auth token`
+> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Password**: is your fly token, which you can obtain from `fly auth token`
 
-#### Example using the NATs client
+### Example using the NATs client
 
 Launch a nats client based on the nats-server image
 
@@ -179,8 +179,8 @@ fly -a nats-client ssh console
 
 ```
 nats context add nats --server [fdaa::3]:4223 --description "NATS Demo" --select \
-   --user <YOUR FLY ORG SLUG>
-   --pass <YOUR PAT>
+  --user <YOUR FLY ORG SLUG> \
+  --password <YOUR PAT>
 ```
 
 ```
