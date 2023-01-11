@@ -132,10 +132,15 @@ One of these is required for New Relic logs. New Relic recommend the license key
 
 ### Uptrace
 
-| Secret            | Description        |
-| ----------------- | ------------------ |
-| `UPTRACE_API_KEY` | Uptrace API key    |
-| `UPTRACE_PROJECT` | Uptrace project ID |
+| Secret                  | Description        |
+| -----------------       | ------------------ |
+| `UPTRACE_API_KEY`       | Uptrace API key    |
+| `UPTRACE_PROJECT`       | Uptrace project ID |
+| `UPTRACE_SINK_INPUT`    | `"log_json"`, etc. |
+| `UPTRACE_SINK_ENCODING` | `"json"`, etc.     |
+
+For UPTRACE_SINK_ENCODING Vector expects one of `avro`, `gelf`, `json`, `logfmt`, `native`,
+`native_json`, `raw_message`, `text` for key `sinks.uptrace`.
 
 ### EraSearch
 
