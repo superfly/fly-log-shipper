@@ -1,6 +1,8 @@
 [sinks.new_relic]
   # General
-  type = "new_relic_logs"
+  type = "new_relic"
   inputs = ["log_json"]
-  compression = "gzip" 
-
+  compression = "gzip"
+  region = "${NEW_RELIC_REGION}"
+  account_id = "${NEW_RELIC_ACCOUNT_ID}"
+  api = "logs"
