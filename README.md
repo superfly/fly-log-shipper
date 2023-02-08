@@ -116,6 +116,8 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | ----------------------- | -------------------------------- |
 | `NEW_RELIC_INSERT_KEY`  | (optional) New Relic Insert key  |
 | `NEW_RELIC_LICENSE_KEY` | (optional) New Relic License key |
+| `NEW_RELIC_REGION`      | (optional) eu or us (default us) |
+| `NEW_RELIC_ACCOUNT_ID`  | New Relic Account Id             |
 
 ### Papertrail
 
