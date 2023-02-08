@@ -37,7 +37,7 @@ defined in `vector-configs/vector.toml`. Not doing so will result in health chec
   internal_port = 8686
 ```
 
-----
+---
 
 Set the secrets below associated with your desired log destination
 
@@ -56,14 +56,14 @@ Set the secrets below associated with your desired log destination
 ### Axiom
 
 | Secret          | Description   |
-| ----------------| --------------|
+| --------------- | ------------- |
 | `AXIOM_TOKEN`   | Axiom token   |
 | `AXIOM_DATASET` | Axiom dataset |
 
 ### Datadog
 
 | Secret            | Description                                   |
-| ----------------- | ----------------------------------------------|
+| ----------------- | --------------------------------------------- |
 | `DATADOG_API_KEY` | API key for your Datadog account              |
 | `DATADOG_SITE`    | (optional) The Datadog site. ie: datadoghq.eu |
 
@@ -151,6 +151,13 @@ For UPTRACE_SINK_ENCODING Vector expects one of `avro`, `gelf`, `json`, `logfmt`
 | `ERASEARCH_URL`   | EraSearch Endpoint              |
 | `ERASEARCH_AUTH`  | EraSearch User                  |
 | `ERASEARCH_INDEX` | EraSearch Index you want to use |
+
+### HTTP
+
+| Secret       | Description            |
+| ------------ | ---------------------- |
+| `HTTP_URL`   | HTTP/HTTPS Endpoint    |
+| `HTTP_TOKEN` | HTTP Bearer auth token |
 
 ---
 

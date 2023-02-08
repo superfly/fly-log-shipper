@@ -27,5 +27,6 @@ fi
 [[ ! -z "$ERASEARCH_URL" ]] && [[ ! -z "$ERASEARCH_INDEX" ]] && [[ ! -z "$ERASEARCH_AUTH" ]] && cat /etc/vector/erasearch.toml >> /etc/vector/vector.toml
 [[ ! -z "$LOKI_URL" ]] && [[ ! -z "$LOKI_USERNAME" ]] && [[ ! -z "$LOKI_PASSWORD" ]] && cat /etc/vector/loki.toml >> /etc/vector/vector.toml
 [[ ! -z "$AXIOM_TOKEN" ]] && [[ ! -z "$AXIOM_DATASET" ]] && cat /etc/vector/axiom.toml >> /etc/vector/vector.toml
+[[ ! -z "$HTTP_URL" ]] && cat /etc/vector/http.toml >> /etc/vector/vector.toml
 
 exec vector -c /etc/vector/vector.toml
