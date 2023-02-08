@@ -1,8 +1,8 @@
 [sinks.uptrace]
   type = "http"
-  inputs = ["log_json"]
-  encoding.codec = "ndjson"
+  inputs = ["${UPTRACE_SINK_INPUT}"]
+  encoding.codec = "${UPTRACE_SINK_ENCODING}"
+  framing.method = "newline_delimited"
   compression = "gzip"
-  uri = "https://api.uptrace.dev/api/v1/vector-logs"
-  headers.uptrace-dsn = "https://${UPTRACE_API_KEY}@api.uptrace.dev/${UPTRACE_PROJECT}"
-
+  uri = "https://api.uptrace.dev/api/v1/vector/logs"
+  headers.uptrace-dsn = "https://${UPTRACE_API_KEY}@uptrace.dev/${UPTRACE_PROJECT}"
