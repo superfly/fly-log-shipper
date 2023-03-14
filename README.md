@@ -124,6 +124,7 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | Secret                | Description         |
 | --------------------- | ------------------- |
 | `PAPERTRAIL_ENDPOINT` | Papertrail endpoint |
+| `PAPERTRAIL_ENCODING_CODEC` | Papertrail codec (default is "json") |
 
 ### Sematext
 

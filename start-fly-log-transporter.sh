@@ -19,7 +19,15 @@ if [ ! -z "$NEW_RELIC_INSERT_KEY" ] || [ ! -z "$NEW_RELIC_LICENSE_KEY" ]; then
   [[ ! -z "$NEW_RELIC_INSERT_KEY" ]] && echo "  insert_key = \"${NEW_RELIC_INSERT_KEY}\"" >> /etc/vector/vector.toml 
   [[ ! -z "$NEW_RELIC_LICENSE_KEY" ]] && echo "  license_key = \"${NEW_RELIC_LICENSE_KEY}\"" >> /etc/vector/vector.toml 
 fi
-[[ ! -z "$PAPERTRAIL_ENDPOINT" ]] && cat /etc/vector/papertrail.toml >> /etc/vector/vector.toml 
+if [ ! -z "$PAPERTRAIL_ENDPOINT" ]; then
+  cat /etc/vector/papertrail.toml >> /etc/vector/vector.toml 
+  if [ ! -z "$PAPERTRAIL_ENCODING_CODEC" ]; then
+    echo "  encoding.codec = \"${PAPERTRAIL_ENCODING_CODEC}\"" >> /etc/vector/vector.toml 
+  else
+    echo "  encoding.codec = \"json\"" >> /etc/vector/vector.toml 
+  fi
+fi
+
 [[ ! -z "$SEMATEXT_TOKEN" ]] && cat /etc/vector/sematext.toml >> /etc/vector/vector.toml
 [[ ! -z "$UPTRACE_API_KEY" ]] && [[ ! -z "$UPTRACE_PROJECT" ]] && cat /etc/vector/uptrace.toml >> /etc/vector/vector.toml
 [[ ! -z "$LOGTAIL_TOKEN" ]] && cat /etc/vector/logtail.toml >> /etc/vector/vector.toml
