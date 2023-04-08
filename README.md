@@ -2,21 +2,44 @@
 
 Ship logs from fly to other providers using [NATS](https://docs.nats.io/) and [Vector](https://vector.dev/)
 
-Here we have some vector configs, alongside a wrapper script to run it all,
-that will subscribe to a log stream of your organisation's logs and ship it to various providers.
+In this repo you will find various [Vector Sinks](https://vector.dev/docs/reference/configuration/sinks/) along with the required fly config. The end result is a Fly.IO application that automatically reads your organisation logs and sends them to external providers.
 
-# Configuration
+# Quick start
 
-Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure using the following secrets:
+1. Create a new fly logger app based on our docker image
+
+```
+fly launch --image ghcr.io/superfly/fly-log-shipper:latest
+```
+
+2. Set [NATS source secrets](#nats-source-configuration) for your new app
+3. Set your desired [provider](#provider-configuration) from below
+
+**Thats it** - no need to setup NATs clients within your apps, as fly apps are already sending monitoring information back to fly which we can read.
+
+However for advanced uses you can still configure a NATs client in your apps to talk to this NATs server. See [NATS](#nats)
 
 ## NATS source configuration
 
 | Secret         | Description                                                                                                      |
-| -------------- |------------------------------------------------------------------------------------------------------------------|
+| -------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `ORG`          | Organisation slug (default to `personal`)                                                                        |
 | `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly auth token)`)                  |
 | `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
 | `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped |
+
+After generating your `fly.toml`, remember to update the internal port to match the `vector` internal port
+defined in `vector-configs/vector.toml`. Not doing so will result in health checks failing on deployment.
+
+```
+[[services]]
+  http_checks = []
+  internal_port = 8686
+```
+
+---
+
+Set the secrets below associated with your desired log destination
 
 ## Provider configuration
 
@@ -30,11 +53,19 @@ Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure usin
 | `AWS_REGION`            | Region for the bucket                                                                   |
 | `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
 
+### Axiom
+
+| Secret          | Description   |
+| --------------- | ------------- |
+| `AXIOM_TOKEN`   | Axiom token   |
+| `AXIOM_DATASET` | Axiom dataset |
+
 ### Datadog
 
-| Secret            | Description                      |
-| ----------------- | -------------------------------- |
-| `DATADOG_API_KEY` | API key for your Datadog account |
+| Secret            | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `DATADOG_API_KEY` | API key for your Datadog account              |
+| `DATADOG_SITE`    | (optional) The Datadog site. ie: datadoghq.eu |
 
 ### Honeycomb
 
@@ -45,9 +76,10 @@ Create a new Fly app based on this [Dockerfile](./Dockerfile) and configure usin
 
 ### Humio
 
-| Secret        | Description |
-| ------------- | ----------- |
-| `HUMIO_TOKEN` | Humio token |
+| Secret           | Description                             |
+| ---------------- | --------------------------------------- |
+| `HUMIO_TOKEN`    | Humio token                             |
+| `HUMIO_ENDPOINT` | (optional) Endpoint URL to send logs to |
 
 ### Logdna
 
@@ -84,12 +116,15 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | ----------------------- | -------------------------------- |
 | `NEW_RELIC_INSERT_KEY`  | (optional) New Relic Insert key  |
 | `NEW_RELIC_LICENSE_KEY` | (optional) New Relic License key |
+| `NEW_RELIC_REGION`      | (optional) eu or us (default us) |
+| `NEW_RELIC_ACCOUNT_ID`  | New Relic Account Id             |
 
 ### Papertrail
 
 | Secret                | Description         |
 | --------------------- | ------------------- |
 | `PAPERTRAIL_ENDPOINT` | Papertrail endpoint |
+| `PAPERTRAIL_ENCODING_CODEC` | Papertrail codec (default is "json") |
 
 ### Sematext
 
@@ -100,10 +135,15 @@ One of these is required for New Relic logs. New Relic recommend the license key
 
 ### Uptrace
 
-| Secret            | Description        |
-| ----------------- | ------------------ |
-| `UPTRACE_API_KEY` | Uptrace API key    |
-| `UPTRACE_PROJECT` | Uptrace project ID |
+| Secret                  | Description        |
+| -----------------       | ------------------ |
+| `UPTRACE_API_KEY`       | Uptrace API key    |
+| `UPTRACE_PROJECT`       | Uptrace project ID |
+| `UPTRACE_SINK_INPUT`    | `"log_json"`, etc. |
+| `UPTRACE_SINK_ENCODING` | `"json"`, etc.     |
+
+For UPTRACE_SINK_ENCODING Vector expects one of `avro`, `gelf`, `json`, `logfmt`, `native`,
+`native_json`, `raw_message`, `text` for key `sinks.uptrace`.
 
 ### EraSearch
 
@@ -113,19 +153,62 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `ERASEARCH_AUTH`  | EraSearch User                  |
 | `ERASEARCH_INDEX` | EraSearch Index you want to use |
 
+### HTTP
+
+| Secret       | Description            |
+| ------------ | ---------------------- |
+| `HTTP_URL`   | HTTP/HTTPS Endpoint    |
+| `HTTP_TOKEN` | HTTP Bearer auth token |
+
 ---
 
 # NATS
 
-The log stream is provided through the [NATS protocol](https://docs.nats.io/nats-protocol/nats-protocol)
-and is limited to subscriptions to logs in your organisations.
-The NATS source takes some Fly specific environment variables to connect to the stream,
-but any NATS client can connect to `fdaa::3` on port `4223` in a Fly vm,
-with an organisation slug as the username and a Fly Personal Access Token as the password.
+The log stream is provided through the [NATS protocol](https://docs.nats.io/nats-protocol/nats-protocol) and is limited to subscriptions to logs in your organisations.
+
+## Connecting
+
+> Note: You do **not** have to manually connect a NAT Client, see [Quick Start](#quick-start)
+
+If you want to add custom behaviours or modify the subject sent from your app, then you can connect your app to the NATs server manually.
+
+Any fly app can connect to the NATs server on `nats://[fdaa::3]:4223` (IPV6).
+
+**Note: you will need to supply a user / password.**
+
+> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Password**: is your fly token, which you can obtain from `fly auth token`
+
+### Example using the NATs client
+
+Launch a nats client based on the nats-server image
+
+```
+fly launch --image="synadia/nats-server:nightly" --name="nats-client"
+```
+
+SSH into the new app
+
+```
+fly -a nats-client ssh console
+```
+
+```
+nats context add nats --server [fdaa::3]:4223 --description "NATS Demo" --select \
+  --user <YOUR FLY ORG SLUG> \
+  --password <YOUR PAT>
+```
+
+```
+nats pub "logs.test" "hello world"
+```
+
+## Subject
 
 The subject schema is `logs.<app_name>.<region>.<instance_id>` and the standard
 [NATS wildcards](https://docs.nats.io/nats-concepts/subjects#wildcards) can be used.
 In this app, the `SUBJECT` secret can be used to set the subject and limit the scope of the logs streamed.
+
+## Queue
 
 If you would like to run multiple vm's for high availability, the NATS endpoint supports
 [subscription queues](https://docs.nats.io/nats-concepts/queue) to ensure messages are only sent to one

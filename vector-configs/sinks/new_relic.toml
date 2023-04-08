@@ -1,8 +1,11 @@
 [sinks.new_relic]
   # General
-  type = "new_relic_logs"
+  type = "new_relic"
   inputs = ["log_json"]
   compression = "gzip"
+  region = "${NEW_RELIC_REGION}"
+  account_id = "${NEW_RELIC_ACCOUNT_ID}"
+  api = "logs"
   # Key: ${NEW_RELIC_LICENSE_KEY-$NEW_RELIC_INSERT_KEY}
   ${NEW_RELIC_LICENSE_KEY+license_key = \"$NEW_RELIC_LICENSE_KEY\"}
   ${NEW_RELIC_INSERT_KEY+insert_key = \"$NEW_RELIC_INSERT_KEY\"}

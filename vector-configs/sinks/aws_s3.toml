@@ -5,7 +5,8 @@
   bucket = "${AWS_BUCKET}" 
   compression = "gzip" 
   region = "${AWS_REGION}"
-  encoding.codec = "ndjson"
+  framing.method = "newline_delimited"
+  encoding.codec = "json"
   key_prefix = "{{fly.app.name}}/%F/" # optional, default
   healthcheck.enabled = true # optional, default
   ${S3_ENDPOINT+endpoint = "$S3_ENDPOINT"}
