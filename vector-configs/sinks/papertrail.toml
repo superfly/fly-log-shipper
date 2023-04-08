@@ -1,5 +1,5 @@
 [sinks.papertrail]
   type = "papertrail"
   inputs = ["log_json"]
-  endpoint = "${PAPERTRAIL_ENDPOINT}" 
-
+  endpoint = "${PAPERTRAIL_ENDPOINT}"
+  encoding.codec = "${PAPERTRAIL_ENCODING_CODEC:-json}"
