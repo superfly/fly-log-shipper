@@ -9,4 +9,4 @@
   encoding.codec = "json"
   key_prefix = "{{fly.app.name}}/%F/" # optional, default
   healthcheck.enabled = true # optional, default
-
+  ${S3_ENDPOINT+endpoint = "$S3_ENDPOINT"}
