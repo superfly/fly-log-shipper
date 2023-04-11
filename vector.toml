@@ -1,0 +1,21 @@
+[api]
+  enabled = true
+  address = "0.0.0.0:8686"
+
+[sources.fly_log_metrics]
+  type = "internal_metrics"
+
+[sinks.fly_log_metrics_prometheus]
+  type = "prometheus_exporter" # required
+  inputs = ["fly_log_metrics"] # required
+  address = "0.0.0.0:9598" # required
+  default_namespace = "fly-logs" # optional, no default
+
+[sources.demo_logs]
+  type = "demo_logs"
+  format = "json"
+
+[sinks.blackhole]
+  type = "blackhole"
+  inputs = ["demo_logs"]
+  print_interval_secs = 100000

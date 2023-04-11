@@ -1,5 +1,11 @@
-app = "fly-log-shipper-example"
+# fly.toml file generated for soupedup-logs-templates on 2023-04-09T01:30:41+02:00
 
-[metrics]
-  port = 9598
-  path = "/metrics"
+app = "soupedup-logs-templates"
+kill_signal = "SIGINT"
+kill_timeout = 5
+primary_region = "mad"
+processes = []
+
+# [build]
+#   image = "timberio/vector:0.28.1-debian"
+
