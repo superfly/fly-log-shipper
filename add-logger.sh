@@ -6,7 +6,7 @@ BASEDIR=`dirname "$0"`
 
 
 APP=$1
-PROVIDER=$3
+PROVIDER=$2
 export NATS_TOKEN=$3
 export PROVIDER_TOKEN=$4
  template < /etc/vector/logger.toml > /etc/vector/app-loggers/source_${APP}.toml
