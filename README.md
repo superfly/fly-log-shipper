@@ -43,6 +43,12 @@ Set the secrets below associated with your desired log destination
 
 ## Provider configuration
 
+### AppSignal
+
+| Secret                   | Description            |
+| ------------------------ | ---------------------- |
+| `APPSIGNAL_PUSH_API_KEY` | AppSignal push API key |
+
 ### AWS S3
 
 | Secret                  | Description                                                                             |
