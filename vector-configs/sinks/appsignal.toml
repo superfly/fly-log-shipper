@@ -1,0 +1,4 @@
+[sinks.appsignal]
+  type = "appsignal"
+  inputs = [ "log_json" ]
+  push_api_key = "${APPSIGNAL_PUSH_API_KEY}"
