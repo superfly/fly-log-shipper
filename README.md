@@ -68,10 +68,11 @@ Set the secrets below associated with your desired log destination
 
 ### Datadog
 
-| Secret            | Description                                   |
-| ----------------- | --------------------------------------------- |
-| `DATADOG_API_KEY` | API key for your Datadog account              |
-| `DATADOG_SITE`    | (optional) The Datadog site. ie: datadoghq.eu |
+| Secret            | Description                                           |
+| ----------------- | ----------------------------------------------------- |
+| `DATADOG_API_KEY` | API key for your Datadog account                      |
+| `DATADOG_SITE`    | (optional) The Datadog site. ie: datadoghq.eu         |
+| `DATADOG_SOURCE`  | (optional) Sets the `ddsource` field on each log line |
 
 ### Honeycomb
 
