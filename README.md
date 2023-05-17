@@ -166,6 +166,17 @@ For UPTRACE_SINK_ENCODING Vector expects one of `avro`, `gelf`, `json`, `logfmt`
 | `HTTP_URL`   | HTTP/HTTPS Endpoint    |
 | `HTTP_TOKEN` | HTTP Bearer auth token |
 
+### Slack ( experimental )
+
+HTTP sink that can be used for sending log alerts to Slack.
+
+| Secret                 | Description            |
+| ---------------------- | ---------------------- |
+| `SLACK_WEBHOOK_URL`    | Slack WebHook URL      |
+| `SLACK_ALERT_KEYWORDS` | Keywords to alert on   |
+
+Example for setting keywords `fly secrets set SLACK_ALERT_KEYWORDS="[r'SIGTERM', r'reboot']"`
+
 ---
 
 # NATS
