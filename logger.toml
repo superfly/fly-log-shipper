@@ -14,3 +14,14 @@
   source = '''
   . = parse_json!(.message)
   '''
+
+# Global log stream for all apps in the org
+[sources.log_json]
+  type = "nats"
+  url = "nats://[fdaa::3]:4223"
+  queue = "${QUEUE-}"
+  subject = "logs.>"
+  auth.strategy = "user_password"
+  auth.user_password.user = "${ORG-personal}"
+  auth.user_password.password = "${NATS_TOKEN?}"
+  connection_name = "${APP} log stream"
