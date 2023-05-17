@@ -1,7 +1,7 @@
 [sinks.logdna]
   # General
-  type = "logdna" # required
+  type = "mezmo" # required
   inputs = ["log_json"] # required
-  api_key = "${LOGDNA_API_KEY}" # required
+  api_key = "${MEZMO_API_KEY}" # required
   hostname = "{{fly.app.instance}}"
 
