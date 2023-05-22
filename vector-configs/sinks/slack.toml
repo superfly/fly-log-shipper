@@ -1,0 +1,33 @@
+[transforms.log_filter]
+  type = "filter"
+  inputs = [ "log_json" ]
+  condition = '''
+    match_any!(.message, ${SLACK_ALERT_KEYWORDS})
+  '''
+
+[transforms.log_throttle]
+  type = "throttle"
+  inputs = [ "log_filter" ]
+  threshold = 1
+  window_secs = 1
+
+[transforms.log_parse]
+  type = "remap"
+  inputs = [ "log_throttle" ]
+  source = '''
+    .blocks = [{"type": "section", "text": {"type": "mrkdwn", "text":"New alert from *" + .fly.app.name + "*"}},{ "type":"section", "text":{"type": "mrkdwn", "text": "*AppId:* " + .fly.app.instance + "\n*Message:*\n" + "\`\`\`" + .message + "\`\`\`"} }] ?? {}
+    del(.message)
+    del(.event)
+    del(.fly)
+    del(.host)
+    del(.log)
+    del(.timestamp)
+    . = {"message": encode_json(.)} 
+  '''
+
+[sinks.log_http]
+  type = "http"
+  inputs = ["log_parse"]
+  method = "post"
+  encoding.codec = "text"
+  uri = "${SLACK_WEBHOOK_URL}"
