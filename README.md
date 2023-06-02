@@ -87,6 +87,12 @@ Set the secrets below associated with your desired log destination
 | `HUMIO_TOKEN`    | Humio token                             |
 | `HUMIO_ENDPOINT` | (optional) Endpoint URL to send logs to |
 
+### HyperDX
+
+| Secret            | Description     |
+| ----------------- | --------------- |
+| `HYPERDX_API_KEY` | HyperDX API key |
+
 ### Logdna
 
 | Secret           | Description    |
