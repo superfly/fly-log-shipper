@@ -1,4 +1,4 @@
-app = "fly-log-shipper-example"
+app = "fly-log-shipper-pfl"
 
 [metrics]
   port = 9598
