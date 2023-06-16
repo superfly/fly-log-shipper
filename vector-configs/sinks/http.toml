@@ -3,6 +3,6 @@
   inputs = ["log_json"]
   uri = "${HTTP_URL}"
   encoding.codec = "json"
-  auth.strategy = "bearer"
-  auth.token = "${HTTP_TOKEN}"
-
+  auth.strategy = "basic"
+  auth.user = "${HTTP_USER}"
+  auth.password = "${HTTP_PASSWORD}"
