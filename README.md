@@ -165,6 +165,9 @@ For UPTRACE_SINK_ENCODING Vector expects one of `avro`, `gelf`, `json`, `logfmt`
 | ------------ | ---------------------- |
 | `HTTP_URL`   | HTTP/HTTPS Endpoint    |
 | `HTTP_TOKEN` | HTTP Bearer auth token |
+| `HTTP_USER` | HTTP auth user for basic http strategy |
+| `HTTP_PASSWORD` | HTTP auth password for basic http strategy |
+
 
 ### Slack ( experimental )
 
