@@ -3,3 +3,6 @@ app = "fly-log-shipper-pfl"
 [metrics]
   port = 9598
   path = "/metrics"
+[[services]]
+  http_checks = []
+  internal_port = 8686
