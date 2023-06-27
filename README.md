@@ -73,6 +73,12 @@ Set the secrets below associated with your desired log destination
 | `DATADOG_API_KEY` | API key for your Datadog account              |
 | `DATADOG_SITE`    | (optional) The Datadog site. ie: datadoghq.eu |
 
+### Highlight
+
+| Secret                 | Description          |
+| ---------------------- | -------------------- |
+| `HIGHLIGHT_PROJECT_ID` | Highlight Project ID |
+
 ### Honeycomb
 
 | Secret              | Description       |
