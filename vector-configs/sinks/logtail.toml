@@ -1,3 +1,10 @@
+[transforms.remap_logtail_timestamp]
+  type = "remap"
+  inputs = ["log_json"]
+  source = '''
+    .dt = del(.timestamp)
+  '''
+
 [sinks.logtail]
   type = "http"
   inputs = ["log_json"]
