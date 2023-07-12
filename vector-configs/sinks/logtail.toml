@@ -7,7 +7,7 @@
 
 [sinks.logtail]
   type = "http"
-  inputs = ["log_json"]
+  inputs = ["remap_logtail_timestamp"]
   uri = "https://in.logtail.com"
   encoding.codec = "json"
   auth.strategy = "bearer"
