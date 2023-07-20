@@ -1,0 +1,8 @@
+[sinks.highlight]
+  type = "http"
+  inputs = ["log_json"]
+  encoding.codec = "json"
+  framing.method = "newline_delimited"
+  compression = "gzip"
+  uri = "https://pub.highlight.io/v1/logs/json"
+  headers.x-highlight-project = "${HIGHLIGHT_PROJECT_ID}"
