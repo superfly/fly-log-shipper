@@ -1,0 +1,8 @@
+[sinks.hyperdx]
+  type = "http"
+  inputs = ["log_json"]
+  uri = "https://in.hyperdx.io?hdx_platform=flyio"
+  encoding.codec = "json"
+  auth.strategy = "bearer"
+  auth.token = "${HYPERDX_API_KEY}"
+
