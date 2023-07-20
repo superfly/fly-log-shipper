@@ -1,5 +1,5 @@
 [transforms.remap_logflare_loglevel]
-  type = "remap
+  type = "remap"
   inputs = ["log_json"]
   source = '''
     .level = .log.level
