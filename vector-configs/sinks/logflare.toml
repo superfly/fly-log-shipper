@@ -1,6 +1,13 @@
+[transforms.remap_logflare_loglevel]
+  type = "remap"
+  inputs = ["log_json"]
+  source = '''
+    .level = .log.level
+  '''
+
 [sinks.logflare]
   type = "http"
-  inputs = ["log_json"]
+  inputs = ["remap_logflare_loglevel"]
   uri = "https://api.logflare.app/logs/vector?api_key=${LOGFLARE_API_KEY}&source=${LOGFLARE_SOURCE_TOKEN}"
   encoding.codec = "json"
   compression = "none"
