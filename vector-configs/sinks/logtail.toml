@@ -1,7 +1,14 @@
+[transforms.remap_logtail_timestamp]
+  type = "remap"
+  inputs = ["log_json"]
+  source = '''
+    .dt = del(.timestamp)
+  '''
+
 [sinks.logtail]
   type = "http"
-  inputs = ["log_json"]
-  uri = "https://in.logtail.com"
+  inputs = ["remap_logtail_timestamp"]
+  uri = "https://in.logs.betterstack.com"
   encoding.codec = "json"
   auth.strategy = "bearer"
   auth.token = "${LOGTAIL_TOKEN}"
