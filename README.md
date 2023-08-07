@@ -112,11 +112,11 @@ Set the secrets below associated with your desired log destination
 | `LOGFLARE_API_KEY`      | Logflare ingest API key                                 |
 | `LOGFLARE_SOURCE_TOKEN` | Logflare source token (uuid on your Logflare dashboard) |
 
-### Logtail
+### Better Stack Logs (formerly Logtail)
 
-| Secret          | Description        |
-| --------------- | ------------------ |
-| `LOGTAIL_TOKEN` | Logtail auth token |
+| Secret                      | Description                    |
+|-----------------------------|--------------------------------|
+| `BETTER_STACK_SOURCE_TOKEN` | Better Stack Logs source token |
 
 ### Loki
 
