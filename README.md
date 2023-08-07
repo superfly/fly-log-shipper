@@ -66,6 +66,12 @@ Set the secrets below associated with your desired log destination
 | `AXIOM_TOKEN`   | Axiom token   |
 | `AXIOM_DATASET` | Axiom dataset |
 
+### Better Stack Logs (formerly Logtail)
+
+| Secret                      | Description                    |
+|-----------------------------|--------------------------------|
+| `BETTER_STACK_SOURCE_TOKEN` | Better Stack Logs source token |
+
 ### Datadog
 
 | Secret            | Description                                   |
@@ -111,12 +117,6 @@ Set the secrets below associated with your desired log destination
 | ----------------------- | ------------------------------------------------------- |
 | `LOGFLARE_API_KEY`      | Logflare ingest API key                                 |
 | `LOGFLARE_SOURCE_TOKEN` | Logflare source token (uuid on your Logflare dashboard) |
-
-### Better Stack Logs (formerly Logtail)
-
-| Secret                      | Description                    |
-|-----------------------------|--------------------------------|
-| `BETTER_STACK_SOURCE_TOKEN` | Better Stack Logs source token |
 
 ### Loki
 
