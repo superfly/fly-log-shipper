@@ -1,4 +1,7 @@
 app = "fly-log-shipper-example"
+primary_region = "fra"
+[env]
+  ORG = "myorg"
 
 [metrics]
   port = 9598
