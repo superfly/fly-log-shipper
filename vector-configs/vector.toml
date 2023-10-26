@@ -2,9 +2,6 @@
   enabled = true
   address = "0.0.0.0:8686"
 
-[sources.fly_log_metrics]
-  type = "internal_metrics"
-
 [sources.nats]
   type = "nats"
   url = "nats://[fdaa::3]:4223"
@@ -21,12 +18,6 @@
   source = '''
   . = parse_json!(.message)
   '''
-
-[sinks.fly_log_metrics_prometheus]
-  type = "prometheus_exporter" # required
-  inputs = ["fly_log_metrics"] # required
-  address = "0.0.0.0:9598" # required
-  default_namespace = "fly-logs" # optional, no default
 
 [sinks.blackhole]
   type = "blackhole"
