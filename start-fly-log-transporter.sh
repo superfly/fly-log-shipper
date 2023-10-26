@@ -8,4 +8,20 @@ filter /etc/vector/sinks/*.toml 2>&-
 echo 'Configured sinks:'
 find /etc/vector/sinks -type f -exec basename -s '.toml' {} \;
 
-exec vector -c /etc/vector/vector.toml -C /etc/vector/sinks
+
+vector -c /etc/vector/vector.toml -C /etc/vector/sinks &
+/usr/local/bin/vector-monitor &
+
+VECTOR_PID=$!
+MONITOR_PID=$!
+
+cleanup() {
+    echo "Shutting down services..."
+    kill $VECTOR_PID
+    kill $MONITOR_PID
+    exit 0
+}
+
+trap cleanup SIGINT SIGTERM
+
+wait
