@@ -1,6 +1,6 @@
 [api]
   enabled = true
-  address = "0.0.0.0:8686"
+  address = "[::]:8686"
 
 [sources.fly_log_metrics]
   type = "internal_metrics"
@@ -25,7 +25,7 @@
 [sinks.fly_log_metrics_prometheus]
   type = "prometheus_exporter" # required
   inputs = ["fly_log_metrics"] # required
-  address = "0.0.0.0:9598" # required
+  address = "[::]:9598" # required
   default_namespace = "fly-logs" # optional, no default
 
 [sinks.blackhole]
