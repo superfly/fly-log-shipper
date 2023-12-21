@@ -85,6 +85,12 @@ Set the secrets below associated with your desired log destination
 | ---------------------- | -------------------- |
 | `HIGHLIGHT_PROJECT_ID` | Highlight Project ID |
 
+### Honeybadger
+
+| Secret                | Description         |
+| --------------------- | ------------------- |
+| `HONEYBADGER_API_KEY` | Honeybadger API key |
+
 ### Honeycomb
 
 | Secret              | Description       |

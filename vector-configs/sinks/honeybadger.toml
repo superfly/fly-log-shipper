@@ -1,0 +1,14 @@
+[transforms.remap_honeybadger_timestamp]
+  type = "remap"
+  inputs = ["log_json"]
+  source = '''
+    .ts = del(.timestamp)
+  '''
+
+[sinks.honeybadger]
+  type = "http"
+  inputs = ["remap_honeybadger_timestamp"]
+  uri = "https://api.honeybadger.io/v1/events"
+  framing.method = "newline_delimited"
+  encoding.codec = "json"
+  request.headers = {"X-API-Key" = "${HONEYBADGER_API_KEY}"}
