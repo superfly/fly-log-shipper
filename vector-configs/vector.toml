@@ -15,6 +15,12 @@
   auth.user_password.password = "${ACCESS_TOKEN?}"
   connection_name = "Fly logs stream"
 
+[sources.fly_metrics]
+  type = "prometheus_scrape"
+  endpoints = [ "https://api.fly.io/prometheus/${ORG-personal}/federate" ]
+  auth.strategy = 'bearer'
+  auth.token = '${ACCESS_TOKEN?}'
+
 [transforms.log_json]
   type = "remap"
   inputs = ["nats"]
