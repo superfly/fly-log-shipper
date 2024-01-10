@@ -8,7 +8,8 @@
 [sinks.logflare]
   type = "http"
   inputs = ["remap_logflare_loglevel"]
-  uri = "https://api.logflare.app/logs/vector?api_key=${LOGFLARE_API_KEY}&source=${LOGFLARE_SOURCE_TOKEN}"
+  uri = "https://api.logflare.app/logs/vector?source=${LOGFLARE_SOURCE_TOKEN}"
+  request.headers = {"X-API-Key" = "${LOGFLARE_API_KEY}"}
   encoding.codec = "json"
   compression = "none"
 
