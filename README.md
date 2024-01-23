@@ -55,9 +55,9 @@ Set the secrets below associated with your desired log destination
 | ----------------------- | --------------------------------------------------------------------------------------- |
 | `AWS_ACCESS_KEY_ID`     | AWS Access key with access to the log bucket                                            |
 | `AWS_SECRET_ACCESS_KEY` | AWS secret access key                                                                   |
-| `BUCKET_NAME`            | AWS S3 bucket to store logs in                                                          |
+| `AWS_BUCKET`            | AWS S3 bucket to store logs in                                                          |
 | `AWS_REGION`            | Region for the bucket                                                                   |
-| `AWS_ENDPOINT_URL_S3`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
+| `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
 
 ### Axiom
 
