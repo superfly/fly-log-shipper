@@ -2,11 +2,12 @@
   # General
   type = "aws_s3" 
   inputs = ["log_json"]
-  bucket = "${AWS_BUCKET}" 
+  bucket = "${AWS_BUCKET:-$BUCKET_NAME}"
   compression = "gzip" 
-  region = "${AWS_REGION}"
+  region = "${AWS_REGION:-auto}"
   framing.method = "newline_delimited"
   encoding.codec = "json"
   key_prefix = "{{fly.app.name}}/%F/" # optional, default
   healthcheck.enabled = true # optional, default
-  ${S3_ENDPOINT+endpoint = "$S3_ENDPOINT"}
+  ${S3_ENDPOINT+endpoint = "\"$S3_ENDPOINT"\"}
+  ${AWS_ENDPOINT_URL_S3+endpoint = "\"$AWS_ENDPOINT_URL_S3"\"}
