@@ -9,7 +9,7 @@ In this repo you will find various [Vector Sinks](https://vector.dev/docs/refere
 1. Create a new fly logger app based on our docker image
 
 ```
-fly launch --image ghcr.io/superfly/fly-log-shipper:latest
+fly launch --image flyio/log-shipper:latest
 ```
 
 2. Set [NATS source secrets](#nats-source-configuration) for your new app
