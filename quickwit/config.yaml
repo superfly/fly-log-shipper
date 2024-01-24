@@ -1,0 +1,5 @@
+version: 0.7.1
+node_id: searcher-1
+listen_address: 0.0.0.0
+metastore_uri: s3://${BUCKET_NAME}/indexes
+default_index_root_uri: s3://${BUCKET_NAME}/indexes
