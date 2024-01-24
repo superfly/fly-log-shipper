@@ -1,0 +1,10 @@
+version: 0.7.1
+index_id: fly-logs
+doc_mapping:
+  field_mapping:
+    - name: "@timestamp"
+      type: datetime
+      fast: true
+      fast_precision: milliseconds
+    - name: message
+      type: text

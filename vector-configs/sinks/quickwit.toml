@@ -1,0 +1,7 @@
+[sinks.quickwit_logs]
+type = "http"
+method = "post"
+inputs = ["log_json"]
+encoding.codec = "json"
+framing.method = "newline_delimited"
+uri = "${QUICKWIT_URL}/api/v1/otel-logs-v0_7/ingest"
