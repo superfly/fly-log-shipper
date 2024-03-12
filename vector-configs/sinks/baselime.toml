@@ -1,0 +1,8 @@
+[sinks.baselime]
+  type = "http"
+  inputs = ["log_json"]
+  uri = "https://events.baselime.io/v1/${BASELIME_DATASET:-flyio}"
+  encoding.codec = "json"
+  auth.strategy = "bearer"
+  auth.token = "${BASELIME_API_KEY}"
+

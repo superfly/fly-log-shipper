@@ -66,6 +66,13 @@ Set the secrets below associated with your desired log destination
 | `AXIOM_TOKEN`   | Axiom token   |
 | `AXIOM_DATASET` | Axiom dataset |
 
+### Baselime
+
+| Secret              | Description                                   |
+|---------------------|-----------------------------------------------|
+| `BASELIME_API_KEY`  | Baselime API key                              |
+| `BASELIME_DATASET`  | (optional) Baselime dataset (default "flyio") |
+
 ### Better Stack Logs (formerly Logtail)
 
 | Secret                      | Description                    |
