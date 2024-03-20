@@ -7,7 +7,7 @@
 
 [sources.nats]
   type = "nats"
-  url = "nats://[fdaa::3]:4223"
+  url = "nats://[${NETWORK:fdaa}::3]:4223"
   queue = "${QUEUE-}"
   subject = "${SUBJECT-logs.>}"
   auth.strategy = "user_password"
