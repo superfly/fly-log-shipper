@@ -150,6 +150,14 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `NEW_RELIC_REGION`      | (optional) eu or us (default us) |
 | `NEW_RELIC_ACCOUNT_ID`  | New Relic Account Id             |
 
+### OpsVerse
+
+| Secret                  | Description            |
+| ----------------------- | ---------------------- |
+| `OPSVERSE_LOGS_ENDPOINT`| OpsVerse Logs Endpoint |
+| `OPSVERSE_USERNAME`     | OpsVerse Username      |
+| `OPSVERSE_PASSWORD`     | OpsVerse Password      |
+
 ### Papertrail
 
 | Secret                | Description         |
