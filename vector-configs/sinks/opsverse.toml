@@ -1,0 +1,31 @@
+[transforms.loki_json]
+  type = "remap"
+  inputs = ["log_json"]
+  source = '''
+  .level = .log.level
+  if starts_with(.message, "{") ?? false {
+    # parse json messages
+    json = object!(parse_json!(.message))
+    del(.message)
+    . |= json
+  }
+  '''
+
+[sinks.opsverse]
+  type = "loki"
+  inputs = ["loki_json"]
+  endpoint = "${OPSVERSE_LOGS_ENDPOINT}"
+  compression = "gzip"
+  auth.strategy = "basic"
+  auth.user = "${OPSVERSE_USERNAME}"
+  auth.password = "${OPSVERSE_PASSWORD}"
+  encoding.codec = "logfmt"
+  out_of_order_action = "accept"
+
+  labels.event_provider = "{{event.provider}}"
+  labels.fly_region = "{{fly.region}}"
+  labels.fly_app_name = "{{fly.app.name}}"
+  labels.fly_app_instance = "{{fly.app.instance}}"
+  labels.host = "{{host}}"
+  labels.level = "{{level}}"
+
