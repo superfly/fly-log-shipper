@@ -11,3 +11,6 @@
   healthcheck.enabled = true # optional, default
   ${S3_ENDPOINT+endpoint = "\"$S3_ENDPOINT"\"}
   ${AWS_ENDPOINT_URL_S3+endpoint = "\"$AWS_ENDPOINT_URL_S3"\"}
+  ${S3_SSE+server_side_encryption = "\"$S3_SSE"\"}
+  ${S3_SSE_KMS_KEY_ID+ssekms_key_id = "\"$S3_SSE_KMS_KEY_ID"\"}
+  ${S3_STORAGE_CLASS+storage_class = "\"${S3_STORAGE_CLASS}"\"}
