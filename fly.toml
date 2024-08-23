@@ -1,5 +1,21 @@
-app = "fly-log-shipper-example"
+# fly.toml app configuration file generated for fly-log-shipper-billowing-star-221 on 2024-08-23T15:46:47+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-[metrics]
-  port = 9598
-  path = "/metrics"
+app = 'fly-log-shipper-billowing-star-221'
+primary_region = 'lhr'
+
+
+[http_service]
+  internal_port = 8686
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1

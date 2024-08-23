@@ -28,7 +28,11 @@
   address = "[::]:9598" # required
   default_namespace = "fly-logs" # optional, no default
 
-[sinks.blackhole]
-  type = "blackhole"
+[sinks.new_relic]
+  type = "new_relic"
   inputs = ["log_json"]
-  print_interval_secs = 100000
+  compression = "gzip"
+  region = "${NEW_RELIC_REGION}"
+  account_id = "${NEW_RELIC_ACCOUNT_ID}"
+  api = "logs"
+  license_key = "${NEW_RELIC_LICENSE_KEY}"
