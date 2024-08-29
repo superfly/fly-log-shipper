@@ -179,7 +179,7 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | Secret                | Description                                                     |
 | --------------------- | --------------------------------------------------------------- |
 | `SIGNOZ_INGESTION_KEY`| Signoz Access Token                                             |
-| `SIGNOZ_REGION`       | Signoz region (default is 'us', other options are 'in' or 'eu') |
+| `SIGNOZ_URI`       | Signoz URI (default is 'https://ingest.us.signoz.cloud/logs/vector') |
 
 ### Uptrace
 
