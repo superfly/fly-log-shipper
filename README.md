@@ -173,6 +173,14 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `SEMATEXT_REGION` | Sematext region |
 | `SEMATEXT_TOKEN`  | Sematext token  |
 
+
+### Signoz
+
+| Secret                | Description                                                     |
+| --------------------- | --------------------------------------------------------------- |
+| `SIGNOZ_INGESTION_KEY`| Signoz Access Token                                             |
+| `SIGNOZ_URI`       | Signoz URI (default is 'https://ingest.us.signoz.cloud/logs/vector') |
+
 ### Uptrace
 
 | Secret                  | Description        |

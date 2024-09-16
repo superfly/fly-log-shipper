@@ -1,0 +1,13 @@
+[sinks.signoz]
+type = "http"
+inputs = ["log_json"]
+# Potential regions: "us", "eu", "in"
+# See https://signoz.io/docs/logs-management/send-logs/vector-logs-to-signoz/ 
+# for more details
+uri = "${SIGNOZ_URI:-https://ingest.us.signoz.cloud/logs/vector}"
+
+[sinks.signoz.encoding]
+codec = "json"
+
+[sinks.signoz.request.headers]
+signoz-access-token = "${SIGNOZ_INGESTION_KEY}"
