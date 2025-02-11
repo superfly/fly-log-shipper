@@ -79,6 +79,7 @@ Set the secrets below associated with your desired log destination
 | Secret                      | Description                    |
 |-----------------------------|--------------------------------|
 | `BETTER_STACK_SOURCE_TOKEN` | Better Stack Logs source token |
+| `BETTER_STACK_URI`          | Better Stack Logs source URI (default is "https://in.logs.betterstack.com") |
 
 ### Datadog
 
