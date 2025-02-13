@@ -8,7 +8,7 @@
 [sinks.better_stack]
   type = "http"
   inputs = ["remap_better_stack_timestamp"]
-  uri = "https://in.logs.betterstack.com"
+  uri = "https://${BETTER_STACK_INGESTING_HOST:-in.logs.betterstack.com}"
   encoding.codec = "json"
   auth.strategy = "bearer"
   auth.token = "${BETTER_STACK_SOURCE_TOKEN:-$LOGTAIL_TOKEN}"

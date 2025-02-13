@@ -76,9 +76,10 @@ Set the secrets below associated with your desired log destination
 
 ### Better Stack Logs (formerly Logtail)
 
-| Secret                      | Description                    |
-|-----------------------------|--------------------------------|
-| `BETTER_STACK_SOURCE_TOKEN` | Better Stack Logs source token |
+| Secret                        | Description                                                               |
+|-------------------------------|---------------------------------------------------------------------------|
+| `BETTER_STACK_SOURCE_TOKEN`   | Better Stack Telemetry source token                                       |
+| `BETTER_STACK_INGESTING_HOST` | Better Stack source ingesting host (default is `in.logs.betterstack.com`) |
 
 ### Datadog
 
