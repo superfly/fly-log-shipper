@@ -1,0 +1,12 @@
+[sinks.openobserve]
+type = "http"
+inputs = [ "log_json" ]
+uri = "${OPENOBSERVE_URI}"
+method = "post"
+auth.strategy = "basic"
+auth.user = "${OPENOBSERVE_USER}"
+auth.password = "${OPENOBSERVE_PASSWORD}"
+compression = "gzip"
+encoding.codec = "json"
+encoding.timestamp_format = "rfc3339"
+healthcheck.enabled = false
