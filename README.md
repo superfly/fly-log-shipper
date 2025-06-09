@@ -21,13 +21,13 @@ However for advanced uses you can still configure a NATs client in your apps to 
 
 ## NATS source configuration
 
-| Secret         | Description                                                                                                      |
-| -------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ORG`          | Organisation slug (default to `personal`)                                                                        |
-| `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly auth token)`)                  |
-| `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                               |
-| `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped |
-| `NETWORK`      | 6PN network, if you want to run log-shipper through a  WireGuard connection (defaults to `fdaa:0:0`)             |
+| Secret         | Description                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `ORG`          | Organisation slug (default to `personal`)                                                                                            |
+| `ACCESS_TOKEN` | Fly personal access token (required; set with `fly secrets set ACCESS_TOKEN=$(fly tokens create readonly personal | cut -d' ' -f2)`) |
+| `SUBJECT`      | Subject to subscribe to. See [[NATS]] below (defaults to `logs.>`)                                                                   |
+| `QUEUE`        | Arbitrary queue name if you want to run multiple log processes for HA and avoid duplicate messages being shipped                     |
+| `NETWORK`      | 6PN network, if you want to run log-shipper through a  WireGuard connection (defaults to `fdaa:0:0`)                                 |
 
 After generating your `fly.toml`, remember to update the internal port to match the `vector` internal port
 defined in `vector-configs/vector.toml`. Not doing so will result in health checks failing on deployment.
@@ -236,7 +236,7 @@ Any fly app can connect to the NATs server on `nats://[fdaa::3]:4223` (IPV6).
 
 **Note: you will need to supply a user / password.**
 
-> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Password**: is your fly token, which you can obtain from `fly auth token`
+> **User**: is your Fly organisation slug, which you can obtain from `fly orgs list` > **Password**: is your fly token, which you can obtain from `fly tokens create readonly personal | cut -d' ' -f2`
 
 ### Example using the NATs client
 
