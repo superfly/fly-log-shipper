@@ -152,6 +152,14 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `NEW_RELIC_REGION`      | (optional) eu or us (default us) |
 | `NEW_RELIC_ACCOUNT_ID`  | New Relic Account Id             |
 
+### OpenObserve
+
+| Secret                 | Description          |
+| ---------------------- | -------------------- |
+| `OPENOBSERVE_URI`      | OpenObserve URI      |
+| `OPENOBSERVE_USER`     | OpenObserve user     |
+| `OPENOBSERVE_PASSWORD` | OpenObserve password |
+
 ### OpsVerse
 
 | Secret                  | Description            |
