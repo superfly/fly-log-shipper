@@ -16,9 +16,9 @@
   inputs = ["loki_json"]
   endpoint = "${LOKI_URL}"
   compression = "gzip"
-  auth.strategy = "basic"
-  auth.user = "${LOKI_USERNAME}"
-  auth.password = "${LOKI_PASSWORD}"
+$(if [ -n "${LOKI_USERNAME-}" ] && [ -n "${LOKI_PASSWORD-}" ]; then
+  printf '  auth.strategy = "basic"\n  auth.user = "%s"\n  auth.password = "%s"\n' "${LOKI_USERNAME}" "${LOKI_PASSWORD}"
+fi)
   encoding.codec = "json"
 
   labels.event_provider = "{{event.provider}}"
