@@ -52,13 +52,16 @@ Set the secrets below associated with your desired log destination
 
 ### AWS S3
 
-| Secret                  | Description                                                                             |
-| ----------------------- | --------------------------------------------------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | AWS Access key with access to the log bucket                                            |
-| `AWS_SECRET_ACCESS_KEY` | AWS secret access key                                                                   |
-| `AWS_BUCKET`            | AWS S3 bucket to store logs in                                                          |
-| `AWS_REGION`            | Region for the bucket                                                                   |
-| `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi |
+| Secret                  | Description                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | AWS Access key with access to the log bucket                                                   |
+| `AWS_SECRET_ACCESS_KEY` | AWS secret access key                                                                          |
+| `AWS_BUCKET`            | AWS S3 bucket to store logs in                                                                 |
+| `AWS_REGION`            | Region for the bucket                                                                          |
+| `S3_ENDPOINT`           | (optional) Endpoint URL for S3 compatible object stores such as Cloudflare R2 or Wasabi        |
+| `S3_SSE`                | (optional) Server-side encryption of the object in S3. Valid values are `AES256` and `aws:kms` |
+| `S3_SSE_KMS_KEY_ID`     | (optional) Customer-managed KMS key ID to use to server-side encrypt the object in S3          |
+| `S3_STORAGE_CLASS`      | (optional) The type of storage to use for the object. Defaults to `STANDARD`                   |
 
 ### AWS CloudWatch
 
