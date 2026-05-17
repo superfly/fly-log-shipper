@@ -1,0 +1,16 @@
+[sinks.parseable]
+type = "http"
+inputs = ["log_json"]
+uri = "${PARSEABLE_URL}"
+method = "post"
+auth.strategy = "basic"
+auth.user = "${PARSEABLE_USERNAME}"
+auth.password = "${PARSEABLE_PASSWORD}"
+compression = "gzip"
+encoding.codec = "json"
+encoding.timestamp_format = "rfc3339"
+healthcheck.enabled = false
+
+[sinks.parseable.request.headers]
+X-P-Stream = "${PARSEABLE_STREAM-fly_logs}"
+Content-Type = "application/json"
