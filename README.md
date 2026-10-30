@@ -148,8 +148,8 @@ Set the secrets below associated with your desired log destination
 | Secret          | Description   |
 | --------------- | ------------- |
 | `LOKI_URL`      | Loki Endpoint |
-| `LOKI_USERNAME` | Loki Username |
-| `LOKI_PASSWORD` | Loki Password |
+| `LOKI_USERNAME` | (optional) |
+| `LOKI_PASSWORD` | (optional) |
 
 ### New Relic
 
