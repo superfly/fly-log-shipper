@@ -76,6 +76,7 @@ Set the secrets below associated with your desired log destination
 | --------------- | ------------- |
 | `AXIOM_TOKEN`   | Axiom token   |
 | `AXIOM_DATASET` | Axiom dataset |
+| `AXIOM_REGION`  | (optional) Axiom regional edge domain for data locality (e.g. `eu-central-1.aws.edge.axiom.co`). Omit for the default US East 1 endpoint. See [Axiom edge deployments](https://axiom.co/docs/reference/edge-deployments) for available values. |
 
 ### Baselime
 
