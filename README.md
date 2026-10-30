@@ -178,6 +178,15 @@ One of these is required for New Relic logs. New Relic recommend the license key
 | `OPSVERSE_USERNAME`     | OpsVerse Username      |
 | `OPSVERSE_PASSWORD`     | OpsVerse Password      |
 
+### Parseable
+
+| Secret                | Description                                                                 |
+| --------------------- | --------------------------------------------------------------------------- |
+| `PARSEABLE_URL`       | Parseable ingest URL, e.g. `https://parseable.example.com/api/v1/ingest`    |
+| `PARSEABLE_USERNAME`  | Parseable username (HTTP Basic auth)                                        |
+| `PARSEABLE_PASSWORD`  | Parseable password (HTTP Basic auth)                                        |
+| `PARSEABLE_STREAM`    | Target log stream name (default `fly_logs`); sent via `X-P-Stream` header   |
+
 ### Papertrail
 
 | Secret                | Description         |
